@@ -4,18 +4,12 @@
 
 int create(char filename[20])
 {
-    char *data;
-
-   
     FILE * fPtr;
-
-    fPtr = fopen(filename, "w");
+	fPtr = fopen(filename, "w");
     if(fPtr == NULL)
-    {
-       
         printf("Unable to create file.\n");
-        exit(EXIT_FAILURE);
-    }
+        
+ 
 
     fclose(fPtr);
 
@@ -28,22 +22,23 @@ int encrypti(char fname[20],int dif)
 	char ch;
 	FILE *fpts, *fptt;
 	
-	printf("\n\n Encrypting your text file :\n");
-	printf("--------------------------\n"); 	
 	
 
 	fpts=fopen(fname, "r");
 	if(fpts==NULL)
 	{
 		printf(" File does not exists or error in opening..!!");
-		exit(1);
+			return 0;
 	}
+	printf("\n\n Encrypting your text file :\n");
+	printf("--------------------------\n"); 	
+	
 	fptt=fopen("temp.txt", "w");
 	if(fptt==NULL)
 	{
 		printf(" Error in creation of file temp.txt ..!!");
 		fclose(fpts);
-		exit(2);
+			return 0;
 	}
 	while(1)
 	{
@@ -64,14 +59,14 @@ int encrypti(char fname[20],int dif)
 	if(fpts==NULL)
 	{
 		printf(" File does not exists or error in opening..!!");
-		exit(3);
+		return 0;
 	}
 	fptt=fopen("temp.txt", "r");
 	if(fptt==NULL)
 	{
 		printf(" File does not exists or error in opening..!!");
 		fclose(fpts);
-		exit(4);
+			return 0;
 	}
 	while(1)
 	{
@@ -88,7 +83,7 @@ int encrypti(char fname[20],int dif)
 	printf(" File %s successfully encrypted ..!!\n\n", fname);
 	fclose(fpts);
 	fclose(fptt);
-    remove("temp.txt");
+   	remove("temp.txt");
 	return 0;
 }
 
@@ -99,22 +94,23 @@ int decro(char fname[20],int dif)
 	char ch;
 	FILE *fpts, *fptt;
 	
-	printf("\n\n Decrypting your text file :\n");
-	printf("--------------------------\n"); 	
+		
 	
 	
 	fpts=fopen(fname, "r");
 	if(fpts==NULL)
 	{
 		printf(" File does not exists or error in opening..!!");
-		exit(1);
+		return 0;
 	}
+	printf("\n\n Decrypting your text file :\n");
+	printf("--------------------------\n"); 
 	fptt=fopen("temp2.txt", "w");
 	if(fptt==NULL)
 	{
 		printf(" Error in creation of file temp2.txt ..!!");
 		fclose(fpts);
-		exit(2);
+			return 0;
 	}
 	while(1)
 	{
@@ -135,14 +131,14 @@ int decro(char fname[20],int dif)
 	if(fpts==NULL)
 	{
 		printf(" File does not exists or error in opening..!!");
-		exit(3);
+		return 0;
 	}
 	fptt=fopen("temp2.txt", "r");
 	if(fptt==NULL)
 	{
 		printf(" File does not exists or error in opening..!!");
 		fclose(fpts);
-		exit(4);
+		return 0;
 	}
 	while(1)
 	{
@@ -159,5 +155,26 @@ int decro(char fname[20],int dif)
 	printf(" File %s successfully decrypted ..!!\n\n", fname);
 	fclose(fpts);
 	fclose(fptt);
+		remove("temp2.txt");
 	return 0;
+}
+
+
+int writeInfile(char filename[20])
+{
+   char sentence[1000];
+   FILE *fptr;
+
+   fptr = fopen(filename,"w");
+
+   if(fptr == NULL)
+   {
+     create(filename);        
+   }
+
+  printf("Write here:\n");
+    fgets(sentence, sizeof(sentence), stdin);
+    fprintf(fptr, "%s", sentence);
+    fclose(fptr);
+    return 0;
 }
