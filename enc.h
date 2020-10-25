@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define DATA_SIZE 100
 
-void create(char filename[20])
+int create(char filename[20])
 {
     char *data;
 
@@ -20,9 +20,10 @@ void create(char filename[20])
     fclose(fPtr);
 
     printf("File created and saved successfully. :) \n");
+	return 0;
 
 }
-void encrypti(char fname[20],int dif)
+int encrypti(char fname[20],int dif)
 {
 	char ch;
 	FILE *fpts, *fptt;
@@ -88,11 +89,12 @@ void encrypti(char fname[20],int dif)
 	fclose(fpts);
 	fclose(fptt);
     remove("temp.txt");
+	return 0;
 }
 
 
 
-void decro(char fname[20],int dif)
+int decro(char fname[20],int dif)
 {
 	char ch;
 	FILE *fpts, *fptt;
@@ -157,4 +159,5 @@ void decro(char fname[20],int dif)
 	printf(" File %s successfully decrypted ..!!\n\n", fname);
 	fclose(fpts);
 	fclose(fptt);
+	return 0;
 }
