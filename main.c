@@ -10,7 +10,7 @@ void main()
 
    while(1)
    {
-      printf(">");
+      printf("\n>");
         scanf("%s",input);
         if(strcmp(input,"enc")==0)
         {
@@ -36,9 +36,18 @@ void main()
             scanf("%d",&diff);
 
         decro(filename,diff);
-  
         }
-               else if(strcmp(input,"exit")==0)
+
+            else if(strcmp(input,"write")==0)
+               {
+
+                                                    scanf("%s",filename);
+    
+                                                writeInfile(filename);
+      
+                                  }
+
+               else if(strcmp(input,"exit")==0||strcmp(input,"quit")==0)
                {
                    break;
                }
