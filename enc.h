@@ -178,3 +178,160 @@ int writeInfile(char filename[20])
     fclose(fptr);
     return 0;
 }
+
+
+
+
+int cyphoAd(char fname[20],int dif,int r)
+{
+	char ch;
+	FILE *fpts, *fptt;
+	
+	
+
+	fpts=fopen(fname, "r");
+	if(fpts==NULL)
+	{
+		printf(" File does not exists or error in opening..!!");
+			return 0;
+	}
+	printf("\n\n Encrypting your text file :\n");
+	printf("--------------------------\n"); 	
+	
+	fptt=fopen("temp.txt", "w");
+	if(fptt==NULL)
+	{
+		printf(" Error in creation of file temp.txt ..!!");
+		fclose(fpts);
+			return 0;
+	}
+	while(1)
+	{
+		ch=fgetc(fpts);
+		if(ch==EOF)
+		{
+			break;
+		}
+		else
+		{
+			ch=ch+dif;
+			fputc(ch, fptt);
+		}
+		dif=dif+r;
+	}
+	fclose(fpts);
+	fclose(fptt);
+	fpts=fopen(fname, "w");
+	if(fpts==NULL)
+	{
+		printf(" File does not exists or error in opening..!!");
+		return 0;
+	}
+	fptt=fopen("temp.txt", "r");
+	if(fptt==NULL)
+	{
+		printf(" File does not exists or error in opening..!!");
+		fclose(fpts);
+			return 0;
+	}
+	while(1)
+	{
+		ch=fgetc(fptt);
+		if(ch==EOF)
+		{
+			break;
+		}
+		else
+		{
+			fputc(ch, fpts);
+		}
+	}
+	printf(" File %s successfully encrypted ..!!\n\n", fname);
+	fclose(fpts);
+	fclose(fptt);
+   	remove("temp.txt");
+	return 0;
+}
+
+
+
+
+
+int decyphoAd(char fname[20],int dif,int r)
+{
+	char ch;
+	FILE *fpts, *fptt;
+	
+	
+
+	fpts=fopen(fname, "r");
+	if(fpts==NULL)
+	{
+		printf(" File does not exists or error in opening..!!");
+			return 0;
+	}
+	printf("\n\n Encrypting your text file :\n");
+	printf("--------------------------\n"); 	
+	
+	fptt=fopen("temp.txt", "w");
+	if(fptt==NULL)
+	{
+		printf(" Error in creation of file temp.txt ..!!");
+		fclose(fpts);
+			return 0;
+	}
+	while(1)
+	{
+		ch=fgetc(fpts);
+		if(ch==EOF)
+		{
+			break;
+		}
+		else
+		{
+			ch=ch-dif;
+			fputc(ch, fptt);
+		}
+		dif=dif-r;
+	}
+	fclose(fpts);
+	fclose(fptt);
+	fpts=fopen(fname, "w");
+	if(fpts==NULL)
+	{
+		printf(" File does not exists or error in opening..!!");
+		return 0;
+	}
+	fptt=fopen("temp.txt", "r");
+	if(fptt==NULL)
+	{
+		printf(" File does not exists or error in opening..!!");
+		fclose(fpts);
+			return 0;
+	}
+	while(1)
+	{
+		ch=fgetc(fptt);
+		if(ch==EOF)
+		{
+			break;
+		}
+		else
+		{
+			fputc(ch, fpts);
+		}
+	}
+	printf(" File %s successfully encrypted ..!!\n\n", fname);
+	fclose(fpts);
+	fclose(fptt);
+   	remove("temp.txt");
+	return 0;
+}
+
+int delete(char fname[20])
+{
+
+	printf("File Deleted successfully:-)");
+	remove(fname);
+	return 0;
+}
